@@ -97,7 +97,6 @@ if __name__ == "__main__":
     parser.add_argument('--additional', dest='additional',
                         nargs="*", default=[])
     args = parser.parse_args()
-    print(args.additional)
 
     train_df, evaluation, part23 = read_data(args.dir, args.additional)
     part2_q_df, part3_q_df, part2_a_df, part3_a_df = part23
@@ -106,66 +105,25 @@ if __name__ == "__main__":
     pf = PlaylistFeature(train_df)
 
     print("------Phase 1. Get Candidates------")
-    print([pf.num_song, pf.num_tag])
     cmf = CollectiveMF(num_entities=[pf.num_song, pf.num_tag],
                        num_factors=800,
                        regularization=0.01,
                        calculate_training_loss=True,
                        iterations=30)
     cmf.fit(csr_matrix=pf.csr_matrix, confidence=15.)
-    cmf.save('cmf.npz')
-    # # cmf.load('./cmf.npz')
 
     part2_rec_song, part2_rec_tag = get_candidates(cmf,
                                                    part2_q_df,
                                                    pf,
                                                    "Part2 Recommend")
-
-    np.savez_compressed('./part2_rec',
-                        part2_rec_song=part2_rec_song,
-                        part2_rec_tag=part2_rec_tag)
-    dump_output('./cmf_part2.json',
-                part2_q_df.id.tolist(),
-                [[tup[0] for tup in item_rec] for item_rec in part2_rec_song],
-                [[tup[0] for tup in tag_rec] for tag_rec in part2_rec_tag])
-
     part3_rec_song, part3_rec_tag = get_candidates(cmf,
                                                    part3_q_df,
                                                    pf,
                                                    "Part3 Recommend")
-
-    dump_output('./cmf_part3.json',
-                part3_q_df.id.tolist(),
-                [[tup[0] for tup in item_rec] for item_rec in part3_rec_song],
-                [[tup[0] for tup in tag_rec] for tag_rec in part3_rec_tag])
-    np.savez_compressed('./part3_rec',
-                        part3_rec_song=part3_rec_song,
-                        part3_rec_tag=part3_rec_tag)
-
     evaluation_rec_song, evaluation_rec_tag = get_candidates(cmf,
                                                              evaluation_q_df,
                                                              pf,
                                                              "Eval Recommend")
-
-    dump_output('./cmf_evaluation.json',
-                evaluation_q_df.id.tolist(),
-                [[tup[0] for tup in item_rec] for item_rec in evaluation_rec_song],
-                [[tup[0] for tup in tag_rec] for tag_rec in evaluation_rec_tag])
-    np.savez_compressed('./evaluation_rec',
-                        evaluation_rec_song=evaluation_rec_song,
-                        evaluation_rec_tag=evaluation_rec_tag)
-
-    # part2_rec = np.load('./part2_rec.npz')
-    # part2_rec_song = part2_rec['part2_rec_song']
-    # part2_rec_tag = part2_rec['part2_rec_tag']
-
-    # part3_rec = np.load('./part3_rec.npz')
-    # part3_rec_song = part3_rec['part3_rec_song']
-    # part3_rec_tag = part3_rec['part3_rec_tag']
-
-    # evaluation_rec = np.load('./evaluation_rec.npz')
-    # evaluation_rec_song = evaluation_rec['evaluation_rec_song']
-    # evaluation_rec_tag = evaluation_rec['evaluation_rec_tag']
 
     print("------Phase 2. Learning To Rank------")
     print("------Phase 2.1. Song Model------")
