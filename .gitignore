@@ -1,8 +1,8 @@
 .ipynb_checkpoints/
 __pycache__/
 
+data/
 preprocessed/
 
-!data/
 *.json
 *.npz

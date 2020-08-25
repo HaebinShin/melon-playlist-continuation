@@ -3,7 +3,12 @@ This is extra solution in [Melon Playlist Continuation](https://arena.kakao.com/
 It is inspired by [A hybrid two-stage recommender system for automatic playlist continuation](https://dl.acm.org/doi/pdf/10.1145/3267471.3267488) which is 3rd place in [RecSys Challenge ’18](http://www.recsyschallenge.com/2018/) and [Relational Learning via Collective Matrix Factorization](http://www.cs.cmu.edu/~ggordon/singh-gordon-kdd-factorization.pdf).  
 
 ## Dataset
-As stated in the [Challenge Readme](https://arena.kakao.com/c/7/data), the dataset in `data/` contains 150K playlists that have been created by [Melon](https://www.melon.com/) users. The `data/train.json` contains all the data, whereas `data/val.json` and `data/test.json` are just for submission, so only some of the songs and tags are included.  
+As stated in the [Challenge Readme](https://arena.kakao.com/c/7/data), the dataset in `data.tar.gz` contains 150K playlists that have been created by [Melon](https://www.melon.com/) users.  
+Untar dataset as follow.
+```bash
+tar -xvzf data.tar.gz
+```
+The `data/train.json` contains all the data, whereas `data/val.json` and `data/test.json` are just for submission, so only some of the songs and tags are included.  
 So in this repository, we just consider `data/val.json` and `data/test.json` as additional information.
 
 ## Solution
