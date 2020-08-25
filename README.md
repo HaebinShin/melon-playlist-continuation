@@ -12,11 +12,12 @@ So in this repository, we just consider `data/val.json` and `data/test.json` as 
 
 ## Preprocessing - Data Partitioning
 For local evaluation, we create the new `evaluation` dataset. The `part2`, `part3` are train, valid dataset respectively.  
+`part2`, `part3` and `evaluation` are divided question (_q) and answer (_a) part for Boosting's input format.  
 In Phase 1., we train `part1`+`part2_q`+`part3_q`+`evaluation_q` and optionally include `valid.json`+`test.json` as additional information.  
 In Phase 2., we use `part2_q`, `part3_q` as inputs and use `part2_a`, `part3_a` as labels.  
 Please refer to the [A hybrid two-stage recommender system for automatic playlist continuation](https://dl.acm.org/doi/pdf/10.1145/3267471.3267488) for detailed partitioning.
 
-[](./docs/partitioning.svg)
+![](./docs/partitioning.svg)
 
 ## Usage
 ### Preprocessing
