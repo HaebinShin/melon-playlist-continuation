@@ -37,7 +37,7 @@ After run as above, the preprocessed directory is as follow.
        ├── part2_q.json
        ├── part3_q.json
        └── evaluation_q.json
-    └── lables
+    └── labels
        ├── part2_a.json
        ├── part3_a.json
        └── evaluation_a.json
@@ -54,7 +54,7 @@ python3 run.py --dir ./preprocessed
 
 ### Evaluation
 ```bash
-python3 evaluate.py --result ./result.json
+python3 evaluate.py --result ./result.json --answer ./preprocessed/labels/evaluation_a.json
 ```
 
 ## Score
