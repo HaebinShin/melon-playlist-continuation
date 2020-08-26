@@ -106,7 +106,7 @@ if __name__ == "__main__":
 
     print("------Phase 1. Get Candidates------")
     cmf = CollectiveMF(num_entities=[pf.num_song, pf.num_tag],
-                       num_factors=800,
+                       num_factors=1024,
                        regularization=0.01,
                        calculate_training_loss=True,
                        iterations=30)

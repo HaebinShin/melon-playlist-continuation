@@ -59,9 +59,9 @@ python3 evaluate.py --result ./result.json
 
 ## Score
 ```
-Music nDCG: 0.244151
-Tag nDCG: 0.420992
-Final Score: 0.270677
+Music nDCG: 0.250488
+Tag nDCG: 0.413651
+Final Score: 0.274963
 ```
 Final Score = Music nDCG * 0.85 + Tag nDCG * 0.15
 

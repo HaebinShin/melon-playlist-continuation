@@ -102,7 +102,9 @@ class CollectiveMF:
 
 class LTRBoosting():
     def __init__(self, label_gain=None):
-        self.gbm = lgb.LGBMRanker(label_gain=label_gain)
+        self.gbm = lgb.LGBMRanker(label_gain=label_gain,
+                                  n_estimators=300,
+                                  boosting_type='dart')
 
     def fit(self, **kwargs):
         self.gbm.fit(**kwargs)
